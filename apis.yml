@@ -11,8 +11,8 @@ access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Container Tracking
-  - Shipping
   - Logistics
+  - Shipping
   - Supply Chain
 created: '2025-03-01'
 modified: '2026-03-16'
@@ -30,8 +30,8 @@ apis:
     humanURL: https://docs.vizionapi.com/docs/overview
     tags:
       - Container Tracking
-      - Shipping
       - Logistics
+      - Shipping
     properties:
       - type: Documentation
         url: https://docs.vizionapi.com/docs/overview
