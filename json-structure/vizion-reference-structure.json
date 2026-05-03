@@ -1,0 +1,15 @@
+{
+  "name": "VizionReference",
+  "description": "Container tracking subscription with status metadata",
+  "type": "object",
+  "fields": [
+    {"name": "id", "type": "string", "required": true, "description": "Unique reference identifier"},
+    {"name": "container_id", "type": "string", "required": true, "description": "Container identification number"},
+    {"name": "carrier_scac", "type": "string", "required": true, "description": "Carrier SCAC code"},
+    {"name": "active", "type": "boolean", "required": true, "description": "Whether tracking is active"},
+    {"name": "callback_url", "type": "string (URI)", "required": false, "description": "Webhook endpoint URL"},
+    {"name": "last_update_status", "type": "string (enum)", "required": false, "description": "success|pending|failed|none"},
+    {"name": "created_at", "type": "string (date-time)", "required": false},
+    {"name": "updated_at", "type": "string (date-time)", "required": false}
+  ]
+}

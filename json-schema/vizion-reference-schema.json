@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/json-schema/vizion-reference-schema.json",
+  "title": "Vizion Reference",
+  "description": "A Vizion container tracking subscription (reference) with status, metadata, and callback configuration.",
+  "type": "object",
+  "required": ["id", "container_id", "carrier_scac", "active"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique reference identifier assigned by Vizion.",
+      "example": "ref_abc123xyz"
+    },
+    "container_id": {
+      "type": "string",
+      "description": "The container identification number being tracked.",
+      "example": "MSCU1234567"
+    },
+    "carrier_scac": {
+      "type": "string",
+      "description": "SCAC carrier code for the tracking subscription.",
+      "example": "MSCU",
+      "minLength": 2,
+      "maxLength": 10
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the reference is currently active and receiving tracking updates."
+    },
+    "callback_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Webhook endpoint for real-time update delivery.",
+      "example": "https://myapp.example.com/webhooks/vizion"
+    },
+    "last_update_status": {
+      "type": "string",
+      "description": "Status of the most recent update delivery attempt.",
+      "enum": ["success", "pending", "failed", "none"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the reference was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update."
+    }
+  },
+  "examples": [
+    {
+      "id": "ref_abc123xyz",
+      "container_id": "MSCU1234567",
+      "carrier_scac": "MSCU",
+      "active": true,
+      "callback_url": "https://myapp.example.com/webhooks/vizion",
+      "last_update_status": "success",
+      "created_at": "2026-04-15T10:30:00Z",
+      "updated_at": "2026-05-02T08:15:00Z"
+    }
+  ]
+}

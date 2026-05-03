@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/json-schema/vizion-tracking-update-schema.json",
+  "title": "Vizion Tracking Update",
+  "description": "A Vizion tracking event update payload containing container milestone events, ETA/ETA data, origin/destination ports, and vessel information.",
+  "type": "object",
+  "required": ["id", "reference_id", "container_id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique update identifier."
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "The reference ID this update belongs to."
+    },
+    "container_id": {
+      "type": "string",
+      "description": "Container identification number.",
+      "example": "MSCU1234567"
+    },
+    "carrier_scac": {
+      "type": "string",
+      "description": "Carrier SCAC code.",
+      "example": "MSCU"
+    },
+    "events": {
+      "type": "array",
+      "description": "Array of tracking milestone events.",
+      "items": {
+        "$ref": "#/$defs/TrackingEvent"
+      }
+    },
+    "estimated_departure": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Estimated departure from origin port."
+    },
+    "actual_departure": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Actual departure from origin port."
+    },
+    "estimated_arrival": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Estimated arrival at destination port."
+    },
+    "actual_arrival": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Actual arrival at destination port."
+    },
+    "origin": {
+      "$ref": "#/$defs/Location"
+    },
+    "destination": {
+      "$ref": "#/$defs/Location"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "TrackingEvent": {
+      "type": "object",
+      "description": "A single tracking milestone event.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable event description.",
+          "example": "Container loaded on vessel"
+        },
+        "event_type": {
+          "type": "string",
+          "description": "Standardized event type code.",
+          "example": "LOAD"
+        },
+        "event_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the event occurred or is estimated to occur."
+        },
+        "is_actual": {
+          "type": "boolean",
+          "description": "True if historical event; false if estimated."
+        },
+        "location": {
+          "$ref": "#/$defs/Location"
+        },
+        "vessel": {
+          "$ref": "#/$defs/Vessel"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "Geographic location (port, terminal, or rail yard).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Location name.",
+          "example": "Port of Los Angeles"
+        },
+        "locode": {
+          "type": "string",
+          "description": "UN/LOCODE.",
+          "example": "USLAX"
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code.",
+          "example": "US"
+        },
+        "city": {
+          "type": "string",
+          "example": "Los Angeles"
+        },
+        "state": {
+          "type": "string",
+          "example": "CA"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone.",
+          "example": "America/Los_Angeles"
+        }
+      }
+    },
+    "Vessel": {
+      "type": "object",
+      "description": "Vessel carrying the container.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Vessel name.",
+          "example": "MSC MAYA"
+        },
+        "imo": {
+          "type": "string",
+          "description": "IMO vessel number.",
+          "example": "9398405"
+        },
+        "voyage": {
+          "type": "string",
+          "description": "Voyage number.",
+          "example": "FE427R"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+vocabulary:
+  name: Vizion Vocabulary
+  description: >-
+    Canonical terms and concepts used in the Vizion Container Tracking API,
+    covering container logistics, ocean freight, tracking events, and the
+    API's reference/update data model.
+  version: 1.0.0
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Container Tracking
+    - Logistics
+    - Shipping
+
+terms:
+  - term: Reference
+    definition: >-
+      A Vizion container tracking subscription. Created by providing a
+      container ID and carrier SCAC code. Once created, Vizion begins
+      collecting tracking data and delivering updates via webhook or polling.
+    tags:
+      - Core
+
+  - term: Container ID
+    altTerms:
+      - container_id
+    definition: >-
+      The unique identification number for a shipping container, following
+      the ISO 6346 format (e.g. MSCU1234567). Consists of a 4-letter owner
+      code, a 6-digit serial number, and a check digit.
+    tags:
+      - Container
+
+  - term: SCAC Code
+    altTerms:
+      - carrier_code
+      - carrier_scac
+      - Standard Carrier Alpha Code
+    definition: >-
+      A 2-4 letter code assigned by the National Motor Freight Traffic
+      Association (NMFTA) to uniquely identify transportation companies.
+      Used in Vizion to specify which carrier to query for container data.
+      Examples: MSCU (MSC), MAEU (Maersk), HLCU (Hapag-Lloyd).
+    tags:
+      - Carrier
+
+  - term: Tracking Update
+    altTerms:
+      - TrackingUpdate
+    definition: >-
+      A payload from Vizion containing all tracking events for a container
+      at a point in time, including origin/destination, vessel info,
+      estimated and actual dates, and milestone events.
+    tags:
+      - Data
+
+  - term: Tracking Event
+    altTerms:
+      - TrackingEvent
+    definition: >-
+      An individual milestone in a container's journey. Events include:
+      gate-in, loaded, departed, transshipment, arrived, discharged,
+      customs clearance, and delivered.
+    tags:
+      - Data
+
+  - term: Webhook
+    definition: >-
+      A real-time HTTP callback that Vizion sends to a caller-provided URL
+      when new tracking data is available. The alternative to polling the
+      GET /references/{id}/updates endpoint.
+    tags:
+      - Integration
+
+  - term: Callback URL
+    altTerms:
+      - callback_url
+    definition: >-
+      The HTTPS endpoint provided when creating a reference, to which Vizion
+      will POST tracking updates. Must return a 200 HTTP status to acknowledge
+      receipt; otherwise Vizion will retry at the next scheduled interval.
+    tags:
+      - Integration
+
+  - term: UN/LOCODE
+    altTerms:
+      - locode
+      - UN Location Code
+    definition: >-
+      A geographic coding scheme for trade and transport locations maintained
+      by UNECE. A 5-character code consisting of a 2-letter country code and
+      a 3-letter location code (e.g. USLAX for Port of Los Angeles).
+    tags:
+      - Geography
+
+  - term: IMO Number
+    altTerms:
+      - imo
+    definition: >-
+      A unique 7-digit identifier assigned to maritime vessels by the
+      International Maritime Organization (IMO). Remains with the vessel
+      throughout its operating life.
+    tags:
+      - Vessel
+
+  - term: ETA
+    altTerms:
+      - Estimated Time of Arrival
+      - estimated_arrival
+    definition: >-
+      The predicted date and time at which a container is expected to arrive
+      at its destination port, based on current vessel position and schedule.
+    tags:
+      - Scheduling
+
+  - term: ETD
+    altTerms:
+      - Estimated Time of Departure
+      - estimated_departure
+    definition: >-
+      The predicted date and time at which a vessel is expected to depart
+      from the origin port.
+    tags:
+      - Scheduling
+
+  - term: Transshipment
+    definition: >-
+      The transfer of a container from one vessel to another at an
+      intermediate port during its journey from origin to destination.
+    tags:
+      - Logistics
+
+  - term: Polling
+    definition: >-
+      The pattern of periodically calling GET /references/{id}/updates to
+      check for new tracking events, as an alternative to webhooks.
+    tags:
+      - Integration

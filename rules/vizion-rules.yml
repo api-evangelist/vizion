@@ -1,0 +1,85 @@
+extends:
+  - spectral:oas
+
+rules:
+  vizion-operation-ids-camel-case:
+    description: Operation IDs must use camelCase to match Vizion SDK conventions.
+    message: "{{property}} must be camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  vizion-require-api-key-security:
+    description: All Vizion API operations require X-API-Key authentication.
+    message: "Operation {{path}} must define security with ApiKeyAuth"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: security
+      function: truthy
+
+  vizion-require-summaries:
+    description: All operations must have a human-readable summary.
+    message: "Operation {{path}} must have a summary"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  vizion-require-descriptions:
+    description: All operations and schemas must have descriptions.
+    message: "{{path}} must have a description"
+    severity: warn
+    given:
+      - "$.paths[*][*]"
+      - "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+
+  vizion-path-params-have-descriptions:
+    description: All path parameters must be described.
+    message: "Path parameter {{path}} must have a description"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in == 'path')]"
+    then:
+      field: description
+      function: truthy
+
+  vizion-responses-define-401:
+    description: All protected operations should define a 401 Unauthorized response.
+    message: "Authenticated operation {{path}} should define a 401 response"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: responses.401
+      function: truthy
+
+  vizion-use-iso8601-dates:
+    description: All date/time fields must use ISO 8601 format (format = date-time).
+    message: "Date field {{path}} must use format: date-time"
+    severity: warn
+    given: "$.components.schemas[*].properties[*][?(@.type == 'string')]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          if:
+            properties:
+              description:
+                pattern: "(date|time|timestamp|created|updated|departed|arrived)"
+          then:
+            required: ["format"]
+
+  vizion-require-server:
+    description: OpenAPI specs must define at least one server.
+    message: "Spec must define at least one server"
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy

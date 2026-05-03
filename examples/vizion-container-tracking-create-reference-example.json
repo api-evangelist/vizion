@@ -1,0 +1,31 @@
+{
+  "title": "Create Container Reference",
+  "description": "Subscribe to real-time tracking for container MSCU1234567 from carrier MSC.",
+  "operation": "createReference",
+  "request": {
+    "method": "POST",
+    "url": "https://prod.vizionapi.com/references",
+    "headers": {
+      "X-API-Key": "your-api-key-here",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "container_id": "MSCU1234567",
+      "carrier_code": "MSCU",
+      "callback_url": "https://myapp.example.com/webhooks/vizion"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "ref_abc123xyz",
+      "container_id": "MSCU1234567",
+      "carrier_scac": "MSCU",
+      "active": true,
+      "callback_url": "https://myapp.example.com/webhooks/vizion",
+      "last_update_status": "pending",
+      "created_at": "2026-05-03T09:00:00Z",
+      "updated_at": "2026-05-03T09:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "title": "List Reference Updates (Tracking Events)",
+  "description": "Poll for all tracking milestone events for a container reference.",
+  "operation": "listReferenceUpdates",
+  "request": {
+    "method": "GET",
+    "url": "https://prod.vizionapi.com/references/ref_abc123xyz/updates",
+    "headers": {
+      "X-API-Key": "your-api-key-here"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "upd_def456",
+          "reference_id": "ref_abc123xyz",
+          "container_id": "MSCU1234567",
+          "carrier_scac": "MSCU",
+          "estimated_departure": "2026-04-10T00:00:00Z",
+          "actual_departure": "2026-04-11T06:30:00Z",
+          "estimated_arrival": "2026-05-08T00:00:00Z",
+          "origin": {
+            "name": "Port of Shanghai",
+            "locode": "CNSHA",
+            "country": "CN",
+            "city": "Shanghai",
+            "timezone": "Asia/Shanghai"
+          },
+          "destination": {
+            "name": "Port of Los Angeles",
+            "locode": "USLAX",
+            "country": "US",
+            "city": "Los Angeles",
+            "state": "CA",
+            "timezone": "America/Los_Angeles"
+          },
+          "events": [
+            {
+              "description": "Container gate in at origin terminal",
+              "event_type": "GATE_IN",
+              "event_timestamp": "2026-04-09T14:00:00Z",
+              "is_actual": true,
+              "location": {
+                "name": "Yangshan Deepwater Port",
+                "locode": "CNSHA",
+                "country": "CN"
+              }
+            },
+            {
+              "description": "Container loaded on vessel",
+              "event_type": "LOAD",
+              "event_timestamp": "2026-04-11T06:30:00Z",
+              "is_actual": true,
+              "location": {
+                "name": "Port of Shanghai",
+                "locode": "CNSHA",
+                "country": "CN"
+              },
+              "vessel": {
+                "name": "MSC MAYA",
+                "imo": "9398405",
+                "voyage": "FE427R"
+              }
+            },
+            {
+              "description": "Vessel departed from origin port",
+              "event_type": "DEPARTURE",
+              "event_timestamp": "2026-04-11T09:00:00Z",
+              "is_actual": true,
+              "location": {
+                "name": "Port of Shanghai",
+                "locode": "CNSHA",
+                "country": "CN"
+              },
+              "vessel": {
+                "name": "MSC MAYA",
+                "imo": "9398405",
+                "voyage": "FE427R"
+              }
+            },
+            {
+              "description": "Container estimated to arrive at destination",
+              "event_type": "ARRIVAL",
+              "event_timestamp": "2026-05-08T08:00:00Z",
+              "is_actual": false,
+              "location": {
+                "name": "Port of Los Angeles",
+                "locode": "USLAX",
+                "country": "US",
+                "city": "Los Angeles",
+                "state": "CA"
+              }
+            }
+          ],
+          "created_at": "2026-05-03T09:00:00Z",
+          "updated_at": "2026-05-03T10:00:00Z"
+        }
+      ],
+      "total": 1,
+      "page": 1,
+      "per_page": 20
+    }
+  }
+}

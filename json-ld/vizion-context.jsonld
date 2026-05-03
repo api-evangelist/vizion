@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "vizion": "https://vizionapi.com/vocabulary#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+
+    "Reference": "vizion:Reference",
+    "TrackingUpdate": "vizion:TrackingUpdate",
+    "TrackingEvent": "vizion:TrackingEvent",
+    "Location": "vizion:Location",
+    "Vessel": "vizion:Vessel",
+
+    "id": {"@id": "@id"},
+    "reference_id": {"@id": "vizion:referenceId", "@type": "xsd:string"},
+    "container_id": {"@id": "vizion:containerId", "@type": "xsd:string"},
+    "carrier_scac": {"@id": "vizion:carrierScac", "@type": "xsd:string"},
+    "active": {"@id": "vizion:active", "@type": "xsd:boolean"},
+    "callback_url": {"@id": "vizion:callbackUrl", "@type": "@id"},
+    "last_update_status": {"@id": "vizion:lastUpdateStatus", "@type": "xsd:string"},
+
+    "events": {"@id": "vizion:events", "@container": "@list"},
+    "event_type": {"@id": "vizion:eventType", "@type": "xsd:string"},
+    "event_timestamp": {"@id": "vizion:eventTimestamp", "@type": "xsd:dateTime"},
+    "description": {"@id": "schema:description"},
+    "is_actual": {"@id": "vizion:isActual", "@type": "xsd:boolean"},
+
+    "estimated_departure": {"@id": "vizion:estimatedDeparture", "@type": "xsd:dateTime"},
+    "actual_departure": {"@id": "vizion:actualDeparture", "@type": "xsd:dateTime"},
+    "estimated_arrival": {"@id": "vizion:estimatedArrival", "@type": "xsd:dateTime"},
+    "actual_arrival": {"@id": "vizion:actualArrival", "@type": "xsd:dateTime"},
+
+    "origin": {"@id": "vizion:origin", "@type": "@id"},
+    "destination": {"@id": "vizion:destination", "@type": "@id"},
+
+    "locode": {"@id": "vizion:locode", "@type": "xsd:string"},
+    "country": {"@id": "schema:addressCountry", "@type": "xsd:string"},
+    "city": {"@id": "schema:addressLocality", "@type": "xsd:string"},
+    "state": {"@id": "schema:addressRegion", "@type": "xsd:string"},
+    "timezone": {"@id": "vizion:timezone", "@type": "xsd:string"},
+
+    "name": {"@id": "schema:name"},
+    "imo": {"@id": "vizion:imoNumber", "@type": "xsd:string"},
+    "voyage": {"@id": "vizion:voyageNumber", "@type": "xsd:string"},
+
+    "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+
+    "Port": "schema:Place",
+    "ShippingDelivery": "schema:ParcelDelivery",
+    "trackingNumber": {"@id": "schema:trackingNumber"}
+  }
+}
