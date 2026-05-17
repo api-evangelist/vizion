@@ -44,7 +44,7 @@ apis:
         url: https://docs.vizionapi.com/docs/overview
       - type: Reference
         url: https://docs.vizionapi.com/reference/introduction
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.vizionapi.com/docs/quick-start
       - type: OpenAPI
         url: >-
@@ -61,7 +61,7 @@ common:
   - url: https://www.vizionapi.com/container-tracking/integrations
     type: Integrations
   - url: https://github.com/vizionapi
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://docs.vizionapi.com/docs/use-the-vizion-postman-collection
     type: Postman Collection
   - url: https://support.vizionapi.com/
