@@ -64,6 +64,8 @@ common:
     type: Postman Collection
   - url: https://support.vizionapi.com/
     type: Support
+  - type: LLMsTxt
+    url: https://docs.vizionapi.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
