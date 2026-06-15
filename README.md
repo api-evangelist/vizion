@@ -1,10 +1,8 @@
-# Vizion
+# Vizion (vizion)
 
-Vizion provides a container tracking API that delivers clean, standardized, and detailed shipment tracking events from ocean carriers, terminals, rail, and customs data sources. The REST API returns JSON-encoded responses and supports real-time webhook delivery.
+Vizion provides a container tracking API that delivers clean, standardized, and detailed shipment tracking events from ocean carriers, terminals, rail, and customs data sources. The REST API returns JSON-encoded responses and supports webhooks for real-time shipment data. Vizion sources data from all major global ocean carriers and standardizes it into a consistent schema regardless of carrier or data source.
 
-**Human URL:** https://www.vizionapi.com  
-**Documentation:** https://docs.vizionapi.com  
-**APIs.json:** https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/apis.yml
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/apis.yml)
 
 ## Scope
 
@@ -14,94 +12,56 @@ Vizion provides a container tracking API that delivers clean, standardized, and 
 
 ## Tags
 
-Container Tracking, Logistics, Ocean Freight, Shipping, Supply Chain, Webhooks
+- Container Tracking
+- Logistics
+- Ocean Freight
+- Shipping
+- Supply Chain
+- Webhooks
+
+## Timestamps
+
+- **Created:** 2025-03-01
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Vizion Container Tracking API
 
-Subscribe to a container by ID and carrier SCAC code. Receive real-time webhook updates or poll for tracking milestones. All events follow a standardized JSON schema.
+The Vizion Container Tracking API provides standardized shipment tracking events from ocean carriers, terminals, rail, and customs data sources. Subscribe to a container by providing its ID and carrier SCAC code. Receive real-time webhook updates or poll for tracking milestones. All events follow a standardized JSON schema regardless of carrier.
 
-**Human URL:** https://docs.vizionapi.com/docs/overview
+- **Human URL:** [https://docs.vizionapi.com/docs/overview](https://docs.vizionapi.com/docs/overview)
+
+#### Tags
+
+- Container Tracking
+- Logistics
+- Ocean Freight
+- Shipping
+- Webhooks
 
 #### Properties
 
 - [Documentation](https://docs.vizionapi.com/docs/overview)
 - [Reference](https://docs.vizionapi.com/reference/introduction)
 - [Getting Started](https://docs.vizionapi.com/docs/quick-start)
-- [OpenAPI](openapi/vizion-container-tracking-openapi.yml)
-
----
-
-## OpenAPI Specifications
-
-| File | Description |
-|---|---|
-| [vizion-container-tracking-openapi.yml](openapi/vizion-container-tracking-openapi.yml) | References CRUD, tracking updates, authentication, and event schemas |
-
-## Spectral Rules
-
-| File | Description |
-|---|---|
-| [vizion-rules.yml](rules/vizion-rules.yml) | Spectral ruleset enforcing Vizion API conventions |
-
-## Naftiko Capabilities
-
-### Shared Definitions
-
-| File | APIs |
-|---|---|
-| [shared/container-tracking.yaml](capabilities/shared/container-tracking.yaml) | Vizion Container Tracking API |
-
-### Workflow Capabilities
-
-| File | Description |
-|---|---|
-| [shipment-visibility.yaml](capabilities/shipment-visibility.yaml) | Unified REST + MCP for shipment visibility workflows |
-
-## JSON Schema
-
-| File | Description |
-|---|---|
-| [vizion-reference-schema.json](json-schema/vizion-reference-schema.json) | Container tracking reference/subscription schema |
-| [vizion-tracking-update-schema.json](json-schema/vizion-tracking-update-schema.json) | Tracking update payload with events, ETA, vessel, and location data |
-
-## JSON Structure
-
-| File | Description |
-|---|---|
-| [vizion-reference-structure.json](json-structure/vizion-reference-structure.json) | Field-level structure for Vizion Reference |
-
-## JSON-LD Context
-
-| File | Description |
-|---|---|
-| [vizion-context.jsonld](json-ld/vizion-context.jsonld) | Linked data context aligned with schema.org/ParcelDelivery |
-
-## Examples
-
-| File | Description |
-|---|---|
-| [vizion-container-tracking-create-reference-example.json](examples/vizion-container-tracking-create-reference-example.json) | POST /references — subscribe to a container |
-| [vizion-container-tracking-list-updates-example.json](examples/vizion-container-tracking-list-updates-example.json) | GET /references/{id}/updates — milestone events |
-
-## Vocabulary
-
-| File | Description |
-|---|---|
-| [vizion-vocabulary.yml](vocabulary/vizion-vocabulary.yml) | Vizion terminology: SCAC, Reference, Tracking Event, Webhook, UN/LOCODE |
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/openapi/vizion-container-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/vizion-container-tracking.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vizion-container-tracking.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [LinkedIn](https://www.linkedin.com/company/vizionapi)
 - [Website](https://www.vizionapi.com/)
 - [Documentation](https://docs.vizionapi.com/)
 - [Reference](https://docs.vizionapi.com/reference/introduction)
 - [Integrations](https://www.vizionapi.com/container-tracking/integrations)
 - [GitHub Organization](https://github.com/vizionapi)
-- [Postman Collection](https://docs.vizionapi.com/docs/use-the-vizion-postman-collection)
+- [Postman  Collection](https://docs.vizionapi.com/docs/use-the-vizion-postman-collection)
 - [Support](https://support.vizionapi.com/)
+- [L L Ms Txt](https://docs.vizionapi.com/llms.txt)
 
 ## Maintainers
 
-**FN:** Kin Lane  
+**FN:** Kin Lane
 **Email:** kin@apievangelist.com

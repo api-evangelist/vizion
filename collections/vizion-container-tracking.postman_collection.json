@@ -1,0 +1,1175 @@
+{
+  "item": [
+    {
+      "id": "cf6e53b1-93e8-491e-8bb3-944926dbe17b",
+      "name": "References",
+      "description": {
+        "content": "Manage container tracking subscriptions (references)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4af4f296-682f-46e7-bef4-144efa21f90b",
+          "name": "List Active References",
+          "request": {
+            "name": "List Active References",
+            "description": {
+              "content": "Returns a paginated list of all active container tracking references for your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "references"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of references per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4dcc6366-48d7-4e29-b846-47bff8361acf",
+              "name": "List of references",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"ref_abc123\",\n      \"container_id\": \"MSCU1234567\",\n      \"carrier_scac\": \"MSCU\",\n      \"active\": true,\n      \"callback_url\": \"https://myapp.example.com/webhooks/vizion\",\n      \"last_update_status\": \"none\",\n      \"created_at\": \"1988-12-29T05:39:26.775Z\",\n      \"updated_at\": \"1975-08-02T04:36:41.824Z\"\n    },\n    {\n      \"id\": \"ref_abc123\",\n      \"container_id\": \"MSCU1234567\",\n      \"carrier_scac\": \"MSCU\",\n      \"active\": true,\n      \"callback_url\": \"https://myapp.example.com/webhooks/vizion\",\n      \"last_update_status\": \"success\",\n      \"created_at\": \"1989-04-02T20:15:32.533Z\",\n      \"updated_at\": \"1986-02-09T02:49:25.790Z\"\n    }\n  ],\n  \"total\": 444,\n  \"page\": 1118,\n  \"per_page\": 2434\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccea3897-ff6b-4cd5-aa17-45c8c62269c5",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or missing X-API-Key header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7b54e99-5e9f-49aa-b01c-1b97058505c7",
+          "name": "Create Container Reference",
+          "request": {
+            "name": "Create Container Reference",
+            "description": {
+              "content": "Subscribe to tracking updates for a container. Provide the container ID and carrier SCAC code. Optionally include a callback_url to receive real-time webhook updates. Once created, Vizion will begin tracking the container and deliver events as they occur.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "references"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_id\": \"<string>\",\n  \"carrier_code\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7e56443-ab8f-438c-90b2-51f6ce633b3e",
+              "name": "Reference created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_id\": \"MSCU1234567\",\n  \"carrier_code\": \"MSCU\",\n  \"callback_url\": \"https://myapp.example.com/webhooks/vizion\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ref_abc123\",\n  \"container_id\": \"MSCU1234567\",\n  \"carrier_scac\": \"MSCU\",\n  \"active\": true,\n  \"callback_url\": \"https://myapp.example.com/webhooks/vizion\",\n  \"last_update_status\": \"pending\",\n  \"created_at\": \"1962-06-12T17:17:41.579Z\",\n  \"updated_at\": \"1954-06-14T23:00:11.172Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b779a728-fb65-48ca-b5c0-79f55a9b7ed4",
+              "name": "Invalid request body or parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_id\": \"MSCU1234567\",\n  \"carrier_code\": \"MSCU\",\n  \"callback_url\": \"https://myapp.example.com/webhooks/vizion\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e59b166-277a-4357-b2ab-392e88268a41",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_id\": \"MSCU1234567\",\n  \"carrier_code\": \"MSCU\",\n  \"callback_url\": \"https://myapp.example.com/webhooks/vizion\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or missing X-API-Key header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92e67264-b1a6-4bb4-bfe4-49af94202fb2",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_id\": \"MSCU1234567\",\n  \"carrier_code\": \"MSCU\",\n  \"callback_url\": \"https://myapp.example.com/webhooks/vizion\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5ce3122-c647-4c7d-90ba-8ba10e634da4",
+          "name": "Get Reference Status",
+          "request": {
+            "name": "Get Reference Status",
+            "description": {
+              "content": "Retrieve the current status and metadata for a specific container tracking reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "references",
+                ":reference_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference_id",
+                  "description": "(Required) The unique identifier of the reference returned when it was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f78cc00f-b6e0-4a16-9bba-decab548555c",
+              "name": "Reference details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference returned when it was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ref_abc123\",\n  \"container_id\": \"MSCU1234567\",\n  \"carrier_scac\": \"MSCU\",\n  \"active\": true,\n  \"callback_url\": \"https://myapp.example.com/webhooks/vizion\",\n  \"last_update_status\": \"pending\",\n  \"created_at\": \"1962-06-12T17:17:41.579Z\",\n  \"updated_at\": \"1954-06-14T23:00:11.172Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6df8ac1f-6f22-4837-9c96-0c40ef644f47",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference returned when it was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or missing X-API-Key header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0447dec-a5b9-429c-9628-b9ea3892cb81",
+              "name": "Reference not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference returned when it was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Reference not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdef9c2c-3607-4d51-a576-1bbbefd2d88f",
+          "name": "Delete Reference",
+          "request": {
+            "name": "Delete Reference",
+            "description": {
+              "content": "Cancel tracking and delete a container reference. No further webhook updates will be sent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "references",
+                ":reference_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference_id",
+                  "description": "(Required) The unique identifier of the reference to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "db85d426-10f7-4d74-b858-811cc143bc6f",
+              "name": "Reference deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2aad2b0-9017-4cc6-810b-aeac181ab112",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or missing X-API-Key header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85c871da-9da5-4c94-adb7-ef8f6a52fffc",
+              "name": "Reference not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Reference not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "56075edc-350c-4f99-82f8-61755454159e",
+      "name": "Updates",
+      "description": {
+        "content": "Retrieve tracking event updates for a reference",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1750f292-8089-4b31-84a2-3097bbef49e0",
+          "name": "List Reference Updates",
+          "request": {
+            "name": "List Reference Updates",
+            "description": {
+              "content": "Retrieve tracking event updates for a specific reference. This is the polling alternative to webhooks. Returns all tracking milestones and location events received for the container since subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "references",
+                ":reference_id",
+                "updates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference_id",
+                  "description": "(Required) The unique identifier of the reference"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "850b9d63-b044-4953-a6f3-be4975e53ec5",
+              "name": "List of tracking updates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"reference_id\": \"string\",\n      \"container_id\": \"string\",\n      \"carrier_scac\": \"string\",\n      \"events\": [\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"2008-03-02T01:54:13.192Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": false\n        },\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"2021-06-05T20:00:14.937Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": false\n        }\n      ],\n      \"estimated_departure\": \"1969-10-12T18:54:45.168Z\",\n      \"estimated_arrival\": \"2006-07-05T04:22:43.063Z\",\n      \"actual_departure\": \"1998-07-05T15:36:30.343Z\",\n      \"actual_arrival\": \"1985-08-01T04:24:06.206Z\",\n      \"origin\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"destination\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"created_at\": \"2004-04-05T00:48:31.446Z\",\n      \"updated_at\": \"1952-11-16T00:06:16.941Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"reference_id\": \"string\",\n      \"container_id\": \"string\",\n      \"carrier_scac\": \"string\",\n      \"events\": [\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"2025-02-09T23:51:23.421Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": true\n        },\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"2018-02-26T10:06:23.174Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": true\n        }\n      ],\n      \"estimated_departure\": \"2015-02-08T08:11:34.766Z\",\n      \"estimated_arrival\": \"1971-01-05T22:12:30.143Z\",\n      \"actual_departure\": \"1970-01-25T23:18:51.185Z\",\n      \"actual_arrival\": \"2026-01-12T17:00:26.774Z\",\n      \"origin\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"destination\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"created_at\": \"2022-08-19T07:57:41.499Z\",\n      \"updated_at\": \"2011-10-12T12:19:57.139Z\"\n    }\n  ],\n  \"total\": 550,\n  \"page\": 3098,\n  \"per_page\": 7178\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1899915-39fc-41da-b33f-c420b97b0a2e",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or missing X-API-Key header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04fb169a-c907-4069-9d0e-43a1a8c6826d",
+              "name": "Reference not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Reference not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "29222e6d-eb62-4459-8f08-7ee873ccfafa",
+      "name": "Webhooks",
+      "description": {
+        "content": "Real-time webhook payloads delivered to your callback URL",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://prod.vizionapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "731294de-831d-45b3-a6a3-5dd690559056",
+    "name": "Vizion Container Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vizion Container Tracking API provides standardized shipment tracking events from ocean carriers, terminals, rail, and customs data sources. Subscribe to a container by providing its container ID and carrier SCAC code. Receive real-time updates via webhooks or poll for tracking milestones via GET endpoints. All events follow a consistent JSON schema regardless of carrier or data source.\n\nContact Support:\n Name: Vizion Support",
+      "type": "text/plain"
+    }
+  }
+}

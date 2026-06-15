@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vizion Container Tracking API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "References",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Active References",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.vizionapi.com/references",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of references per page"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a paginated list of all active container tracking references for your account."
+        },
+        {
+          "info": {
+            "name": "Create Container Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://prod.vizionapi.com/references",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Subscribe to tracking updates for a container. Provide the container ID and carrier SCAC code. Optionally include a callback_url to receive real-time webhook updates. Once created, Vizion will begin tracking the container and deliver events as they occur."
+        },
+        {
+          "info": {
+            "name": "Get Reference Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.vizionapi.com/references/:reference_id",
+            "params": [
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reference returned when it was created"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the current status and metadata for a specific container tracking reference."
+        },
+        {
+          "info": {
+            "name": "Delete Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://prod.vizionapi.com/references/:reference_id",
+            "params": [
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reference to delete"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancel tracking and delete a container reference. No further webhook updates will be sent."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Updates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Reference Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.vizionapi.com/references/:reference_id/updates",
+            "params": [
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reference"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve tracking event updates for a specific reference. This is the polling alternative to webhooks. Returns all tracking milestones and location events received for the container since subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
