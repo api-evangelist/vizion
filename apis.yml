@@ -61,10 +61,10 @@ common:
   - url: https://github.com/vizionapi
     type: GitHubOrganization
   - url: https://docs.vizionapi.com/docs/use-the-vizion-postman-collection
-    type: Postman Collection
+    type: PostmanCollection
   - url: https://support.vizionapi.com/
     type: Support
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.vizionapi.com/llms.txt
 maintainers:
   - FN: Kin Lane
