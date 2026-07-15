@@ -46,6 +46,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/vizion/refs/heads/main/openapi/vizion-container-tracking-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/vizion-agentic-access.yml
   - type: DomainSecurity
     url: security/vizion-domain-security.yml
   - type: Authentication
