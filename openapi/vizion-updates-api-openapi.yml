@@ -1,0 +1,226 @@
+openapi: 3.1.0
+info:
+  title: Vizion Container Tracking References Updates API
+  description: The Vizion Container Tracking API provides standardized shipment tracking events from ocean carriers, terminals, rail, and customs data sources. Subscribe to a container by providing its container ID and carrier SCAC code. Receive real-time updates via webhooks or poll for tracking milestones via GET endpoints. All events follow a consistent JSON schema regardless of carrier or data source.
+  version: 1.0.0
+  contact:
+    name: Vizion Support
+    url: https://support.vizionapi.com/
+  license:
+    name: Proprietary
+    url: https://www.vizionapi.com/
+servers:
+- url: https://prod.vizionapi.com
+  description: Vizion Production API
+tags:
+- name: Updates
+  description: Retrieve tracking event updates for a reference
+paths:
+  /references/{reference_id}/updates:
+    get:
+      operationId: listReferenceUpdates
+      summary: List Reference Updates
+      description: Retrieve tracking event updates for a specific reference. This is the polling alternative to webhooks. Returns all tracking milestones and location events received for the container since subscription.
+      tags:
+      - Updates
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: reference_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the reference
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: List of tracking updates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrackingUpdate'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Error type or code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          description: Additional error details.
+    TrackingEvent:
+      type: object
+      description: An individual tracking milestone event.
+      properties:
+        description:
+          type: string
+          description: Human-readable event description.
+          example: Container loaded on vessel
+        event_type:
+          type: string
+          description: Standardized event type code.
+          example: LOAD
+        event_timestamp:
+          type: string
+          format: date-time
+          description: When the event occurred.
+        location:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        is_actual:
+          type: boolean
+          description: True if this is an actual (historical) event; false if estimated.
+    Location:
+      type: object
+      description: A geographic location (port, terminal, or rail yard).
+      properties:
+        name:
+          type: string
+          description: Location name.
+          example: Port of Los Angeles
+        locode:
+          type: string
+          description: UN/LOCODE for the location.
+          example: USLAX
+        country:
+          type: string
+          description: Two-letter ISO 3166-1 country code.
+          example: US
+        city:
+          type: string
+          description: City name.
+          example: Los Angeles
+        state:
+          type: string
+          description: State or province.
+          example: CA
+        timezone:
+          type: string
+          description: IANA timezone identifier.
+          example: America/Los_Angeles
+    Vessel:
+      type: object
+      description: Vessel information for a tracking event.
+      properties:
+        name:
+          type: string
+          description: Vessel name.
+          example: MSC MAYA
+        imo:
+          type: string
+          description: IMO vessel number.
+          example: '9398405'
+        voyage:
+          type: string
+          description: Voyage number.
+          example: FE427R
+    TrackingUpdate:
+      type: object
+      description: A tracking event update for a container reference.
+      properties:
+        id:
+          type: string
+          description: Unique update identifier.
+        reference_id:
+          type: string
+          description: The reference ID this update belongs to.
+        container_id:
+          type: string
+          description: Container identification number.
+        carrier_scac:
+          type: string
+          description: Carrier SCAC code.
+        events:
+          type: array
+          description: Array of tracking milestone events.
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+        estimated_departure:
+          type: string
+          format: date-time
+          description: Estimated departure from origin port.
+        estimated_arrival:
+          type: string
+          format: date-time
+          description: Estimated arrival at destination port.
+        actual_departure:
+          type: string
+          format: date-time
+          description: Actual departure date.
+        actual_arrival:
+          type: string
+          format: date-time
+          description: Actual arrival date.
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or missing X-API-Key header
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Your Vizion API key. Include in all requests.
+externalDocs:
+  description: Vizion API Documentation
+  url: https://docs.vizionapi.com

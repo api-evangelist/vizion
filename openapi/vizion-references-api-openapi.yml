@@ -1,0 +1,262 @@
+openapi: 3.1.0
+info:
+  title: Vizion Container Tracking References API
+  description: The Vizion Container Tracking API provides standardized shipment tracking events from ocean carriers, terminals, rail, and customs data sources. Subscribe to a container by providing its container ID and carrier SCAC code. Receive real-time updates via webhooks or poll for tracking milestones via GET endpoints. All events follow a consistent JSON schema regardless of carrier or data source.
+  version: 1.0.0
+  contact:
+    name: Vizion Support
+    url: https://support.vizionapi.com/
+  license:
+    name: Proprietary
+    url: https://www.vizionapi.com/
+servers:
+- url: https://prod.vizionapi.com
+  description: Vizion Production API
+tags:
+- name: References
+  description: Manage container tracking subscriptions (references)
+paths:
+  /references:
+    get:
+      operationId: listReferences
+      summary: List Active References
+      description: Returns a paginated list of all active container tracking references for your account.
+      tags:
+      - References
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+        description: Number of references per page
+      responses:
+        '200':
+          description: List of references
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Reference'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createReference
+      summary: Create Container Reference
+      description: Subscribe to tracking updates for a container. Provide the container ID and carrier SCAC code. Optionally include a callback_url to receive real-time webhook updates. Once created, Vizion will begin tracking the container and deliver events as they occur.
+      tags:
+      - References
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReferenceRequest'
+            examples:
+              byCarrierCode:
+                summary: Create reference with carrier SCAC code
+                value:
+                  container_id: MSCU1234567
+                  carrier_code: MSCU
+                  callback_url: https://myapp.example.com/webhooks/vizion
+      responses:
+        '200':
+          description: Reference created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reference'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /references/{reference_id}:
+    get:
+      operationId: getReference
+      summary: Get Reference Status
+      description: Retrieve the current status and metadata for a specific container tracking reference.
+      tags:
+      - References
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: reference_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the reference returned when it was created
+      responses:
+        '200':
+          description: Reference details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteReference
+      summary: Delete Reference
+      description: Cancel tracking and delete a container reference. No further webhook updates will be sent.
+      tags:
+      - References
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: reference_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the reference to delete
+      responses:
+        '200':
+          description: Reference deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Error type or code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          description: Additional error details.
+    CreateReferenceRequest:
+      type: object
+      required:
+      - container_id
+      - carrier_code
+      description: Request body for creating a container tracking reference.
+      properties:
+        container_id:
+          type: string
+          description: The container identification number (e.g. MSCU1234567).
+          example: MSCU1234567
+        carrier_code:
+          type: string
+          description: SCAC carrier code (e.g. MSCU for MSC, MAEU for Maersk).
+          example: MSCU
+        callback_url:
+          type: string
+          format: uri
+          description: Webhook endpoint URL. When provided, Vizion will POST tracking updates to this URL as they become available.
+          example: https://myapp.example.com/webhooks/vizion
+    Reference:
+      type: object
+      description: A container tracking subscription (reference) with status metadata.
+      properties:
+        id:
+          type: string
+          description: Unique reference identifier.
+          example: ref_abc123
+        container_id:
+          type: string
+          description: The tracked container identification number.
+          example: MSCU1234567
+        carrier_scac:
+          type: string
+          description: The carrier SCAC code used for tracking.
+          example: MSCU
+        active:
+          type: boolean
+          description: Whether the reference is actively receiving tracking updates.
+          example: true
+        callback_url:
+          type: string
+          format: uri
+          description: Webhook URL for real-time update delivery.
+          example: https://myapp.example.com/webhooks/vizion
+        last_update_status:
+          type: string
+          description: Status of the last tracking update delivery attempt.
+          enum:
+          - success
+          - pending
+          - failed
+          - none
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the reference was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last update.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or missing X-API-Key header
+    BadRequest:
+      description: Invalid request body or parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
+    UnprocessableEntity:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Your Vizion API key. Include in all requests.
+externalDocs:
+  description: Vizion API Documentation
+  url: https://docs.vizionapi.com
