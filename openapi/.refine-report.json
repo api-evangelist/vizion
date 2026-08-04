@@ -1,0 +1,16 @@
+{
+  "provider": "vizion",
+  "sources": [
+    "vizion-references-api-openapi.yml",
+    "vizion-updates-api-openapi.yml"
+  ],
+  "outputs": [
+    "vizion-references-api-openapi.yml",
+    "vizion-updates-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
