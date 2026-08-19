@@ -1,0 +1,124 @@
+# Vizion Documentation
+
+> Complete reference documentation for the Vizion API. Includes code snippets and examples in Python, Java, Node.js, Ruby, and more.
+
+## Guides
+- [Overview](https://docs.vizionapi.com/docs/overview.md): What is Vizion's Container Tracking API?
+- [Quick start](https://docs.vizionapi.com/docs/quick-start.md): Use cURL to get started with Vizion's Container Tracking API
+- [Input options for tracking containers](https://docs.vizionapi.com/docs/input-options.md): Decide which input option fits your use case
+- [Common questions](https://docs.vizionapi.com/docs/common-issues.md): Get answers to top questions about Vizion's Container Tracking API
+- [Demo environment](https://docs.vizionapi.com/docs/demo-environment.md)
+- [Webhook security](https://docs.vizionapi.com/docs/webhook-security.md): Ways to secure your connection to the data you are receiving from Vizion
+- [Postman collection](https://docs.vizionapi.com/docs/use-the-vizion-postman-collection.md): Work with the Vizion Container Tracking API in Postman, an API platform for building and using APIs
+- [Create reference via Carrier Code](https://docs.vizionapi.com/docs/track-by-carrier-code.md): Details how containers are tracked in our system using Container ID and carrier code as input
+- [Bill of lading not returned](https://docs.vizionapi.com/docs/bl-not-included.md): Explanation of why the bill of lading is not made available in updates when tracking by container ID and carrier code
+- [Create reference via Bill of Lading](https://docs.vizionapi.com/docs/track-by-bl.md): Details how containers are tracked in our system by using a master bill of lading number, and how containers are identified in association to their master bill of lading with parent and child references
+- [Parent and child references](https://docs.vizionapi.com/docs/parent-and-child.md)
+- [Bill of lading number formatting](https://docs.vizionapi.com/docs/formatting-bl.md): Difference between valid and invalid master bill of lading numbers.
+- [Create reference via Auto Carrier Identification](https://docs.vizionapi.com/docs/track-by-aci.md): Details how containers are tracked in our system by using auto carrier identification
+- [Create reference via Booking Number](https://docs.vizionapi.com/docs/track-by-booking.md): Details how containers are tracked in our system by using a booking number
+- [Auto-unsubscribe](https://docs.vizionapi.com/docs/auto-unsubscribe.md): How the Vizion API automatically unsubscribes a reference at end of the container's journey
+- [Container Trace](https://docs.vizionapi.com/docs/container-trace.md)
+- [Last Known Positions](https://docs.vizionapi.com/docs/last-known-positions.md): Learn about the List Last Known Positions endpoint, which returns the most recent position for every container reference in your organization, including transport mode and, for vessels, live AIS coordinates. To access this feature, contact support.
+- [More features](https://docs.vizionapi.com/docs/additional-features.md)
+- [Customs Clearance API](https://docs.vizionapi.com/docs/customs-clearance.md): What is the Customs Clearance API and why is it useful
+- [Configurable tracking frequency](https://docs.vizionapi.com/docs/configurable-tracking-frequency.md): What is configurable tracking frequency and how to adjust the update interval
+- [Duplicate prevention](https://docs.vizionapi.com/docs/duplicate-prevention.md): Explanation of feature to prevent duplicate references
+- [DCSA Event and Location Codes](https://docs.vizionapi.com/docs/dcsa-milestones.md): Feature that creates a codified milestone in accordance to DCSA guidance and best practices, minimizing the dependence on maintaining a list of standardized event descriptions.
+- [DCSA Event Code Types](https://docs.vizionapi.com/docs/dcsa-event-code-types.md): What are the DSCA event code types for each supported journey type of a milestone
+- [Continuous Master Bill of Lading and Booking Processing](https://docs.vizionapi.com/docs/continuous-mbl-processing.md): Feature to continue checking for child container references up until a vessel departure milestone from the origin port
+- [Enhanced Location Reporting](https://docs.vizionapi.com/docs/enhanced-locations.md): Milestone location enhancement that will include SMDG, BIC, SPLC and FIRMS codes
+- [Exception Alerts](https://docs.vizionapi.com/docs/exception-alerts.md): This guide provides a practical, step-by-step walkthrough for subscribing to webhook events, configuring sources, and handling callback payloads
+- [Smart Updates](https://docs.vizionapi.com/docs/smart-updates.md): How Vizion adapts data collection frequency to a shipment's status to reduce latency
+- [Supported Carriers](https://docs.vizionapi.com/docs/supported-carriers.md)
+- [BoxTrack App 1.0](https://docs.vizionapi.com/docs/vizion-container-tracking-app.md)
+- [BoxTrack App 2.0](https://docs.vizionapi.com/docs/boxtrack-app-20.md)
+- [Air Tracking](https://docs.vizionapi.com/docs/air-tracking.md): Push complete, standardized air cargo tracking events into your TMS, ERP, data warehouse, or customer experience through one API. Air Tracking extends the Vizion visibility platform with purpose-built airline and forwarder data.
+- [Core milestone events](https://docs.vizionapi.com/docs/core-milestones.md): Events that Vizion attempts to include in all payloads in the order in which they will appear
+- [Standardized milestone events](https://docs.vizionapi.com/docs/standardized-milestones.md): Information on how Vizion standardizes event names and full list of standardized core milestone events
+- [Update payload](https://docs.vizionapi.com/docs/understand-update-payload.md): Structure of the real-time, standardized, and detailed container milestone events delivered by the Vizion API in JSON format
+- [Formatting](https://docs.vizionapi.com/docs/formatting.md): Additional details on the formatting of specific fields in the update payload, including timestamps and container_iso values
+- [ETAs](https://docs.vizionapi.com/docs/etas.md): How to find estimated time of arrival to destination port in payload
+- [ETDs](https://docs.vizionapi.com/docs/etds.md): How to find estimated time of departure or shipping from the origin port in payload
+- [Top Level Locations](https://docs.vizionapi.com/docs/top-level-locations.md): Defining the four locations available in each reference update payload
+- [Data sources](https://docs.vizionapi.com/docs/data-sources.md): Vizion's API provides milestones that contain a source property indicating the data source of the event
+- [Ports and terminals](https://docs.vizionapi.com/docs/terminals.md): Optimize your shipment data accuracy with Vizion’s Pro plan, offering additional milestones like 'Free time to expire' and 'Available for pickup' directly from terminal operators, reducing reliance on carriers
+- [Rail](https://docs.vizionapi.com/docs/rail.md): With intermodal rail tracking enabled, container milestones reported by the railways will be included in the API's reference update payload, providing comprehensive insights into the shipment process
+- [Check reference status](https://docs.vizionapi.com/docs/reference-status.md): Definitions for each possible reference update status
+- [No data returned](https://docs.vizionapi.com/docs/general-troubleshooting.md): Steps for troubleshooting references that are not returning the expected data
+- [Retrieve missed updates](https://docs.vizionapi.com/docs/system-down.md): What to do if your system was down and was not able to retrieve specific reference updates
+- [Data does not match carrier site](https://docs.vizionapi.com/docs/data-does-not-match-carrier-site.md): Understand why updates do not return the latest data to match the carrier site
+- [No Code Workbook](https://docs.vizionapi.com/docs/no-code-workbook.md): Discover the power of effortless container tracking with Vizion's No Code Workbook
+- [Airtable extension](https://docs.vizionapi.com/docs/airtable.md): Work with Vizion's Container Tracking API in your Airtable base
+- [Zapier app](https://docs.vizionapi.com/docs/zapier.md): Work with Vizion's Container Tracking API in Zapier
+- [Power BI](https://docs.vizionapi.com/docs/power-bi.md): Create a basic dashboard in Power BI using Vizion data
+- [Billable references](https://docs.vizionapi.com/docs/billable-references.md)
+- [Status page](https://docs.vizionapi.com/docs/status-page.md)
+- [Support](https://docs.vizionapi.com/docs/support.md)
+- [Pricing plans](https://docs.vizionapi.com/docs/plans.md)
+- [Tradeview Overview](https://docs.vizionapi.com/docs/overview-tradeview.md)
+- [Globe Explorer](https://docs.vizionapi.com/docs/globe-explorer.md)
+- [Data Explorer](https://docs.vizionapi.com/docs/data-explorer.md)
+- [Universal Search](https://docs.vizionapi.com/docs/universal-search.md)
+
+## API Reference
+- [Introduction](https://docs.vizionapi.com/reference/introduction.md): Get real-time container tracking data via API
+- [Authentication](https://docs.vizionapi.com/reference/authentication.md)
+- [Status codes](https://docs.vizionapi.com/reference/status-codes.md): Vizion API's HTTP response codes
+- [Carriers](https://docs.vizionapi.com/reference/carriers.md)
+- [IP addresses](https://docs.vizionapi.com/reference/ips.md): Ensure your integration securely communicates with Vizion.
+- [Webhooks](https://docs.vizionapi.com/reference/webhooks.md): Automatically receive tracking updates as soon as they are available.
+- [Webhook Events](https://docs.vizionapi.com/reference/webhooks-events.md): Subscribing to notifications and alerts through webhooks.
+- [Tagging](https://docs.vizionapi.com/reference/tagging.md): Organize and categorize references with tags.
+- [Reference Events](https://docs.vizionapi.com/reference/reference-events.md): Visibility into the lifecycle of a reference.
+- [Pagination](https://docs.vizionapi.com/reference/pagination.md)
+- [Create a new reference](https://docs.vizionapi.com/reference/reference_create.md): Create a reference to begin tracking per the [configured cadence](doc:configurable-tracking-frequency).  Related docs: - [Quick start](doc:quick-start)
+- [List active references](https://docs.vizionapi.com/reference/reference_list.md): List all `active` references, sorted by creation date (newest first).
+- [Get reference](https://docs.vizionapi.com/reference/reference_get.md): Returns a reference for a given id.
+- [Unsubscribe a reference](https://docs.vizionapi.com/reference/reference_deactivate.md): Unsubscribe a reference to stop tracking.  Once unsubscribed, a reference is considered "deactivated" and the API will no longer create updates for the given reference.  - If present, all reference children will be unsubscribed.  - If a `callback_url` was provided, webhook updates will no longer be sent.
+- [List reference updates](https://docs.vizionapi.com/reference/reference_updates_list.md): Returns updates for a given reference id.  Related docs: - [Quick start](doc:quick-start) - [Check reference status](doc:reference-status) - [Common issues and steps to troubleshoot](doc:common-issues)
+- [List container trace](https://docs.vizionapi.com/reference/reference_trace_list.md): > ⚠️ Pro Tier Only For access, please [contact support](https://share.hsforms.com/1B6wNyBBSR6uMotj--8Z_0Q56czk).  Returns an array of vessel movements for a given reference id.  Vessel movements are identified using the latest update.
+- [List reference lifecycle events](https://docs.vizionapi.com/reference/reference_events_list.md): Returns the lifecycle event log for a given reference id.  The lifecycle log is an append-only record of significant events for a reference — creation, deactivation, reactivation, extraction attempts, reference updates, and estimated event changes. Events are retained for 18 months.  Pagination is cursor-based: pass the returned `next_cursor` as the `cursor` query parameter to fetch the next page. When there are no further results, `next_cursor` is `null`.  Related docs: - [Reference events](doc:reference-events)
+- [List last known positions](https://docs.vizionapi.com/reference/reference_last_known_positions_list.md): > ⚠️ Pro Tier Only For access, please [contact support](https://share.hsforms.com/1B6wNyBBSR6uMotj--8Z_0Q56czk).  Returns the last known position for each container reference in your organization. Positions are derived from the latest carrier milestone with a transport mode, and — when the container is on a vessel — enriched with live AIS coordinates.  Parent references (bill-of-lading-only or booking-only) are excluded; only references with a `container_id` are returned.
+- [List carriers](https://docs.vizionapi.com/reference/carrier_list.md): Get all carriers. Returns all supported carriers, and the corresponding `carrier_code` and `scac` (**deprecated**) values.
+- [List point-to-point transit offerings](https://docs.vizionapi.com/reference/schedules_transit_offering_list.md): List scheduled sailings between two ports, each broken into its individual legs.  Requires the point-to-point schedules capability: without it the request is rejected with `401`. Contact support@vizionapi.com to have it enabled.
+- [Create a tag](https://docs.vizionapi.com/reference/tag_create.md): Create a new tag.
+- [List tags](https://docs.vizionapi.com/reference/tag_list.md): List all tags.
+- [Get tag](https://docs.vizionapi.com/reference/tag_get.md): Returns a tag for a given id.
+- [Update tag](https://docs.vizionapi.com/reference/tag_update.md): Update a tag's name.
+- [Delete tag](https://docs.vizionapi.com/reference/tag_delete.md): Delete a tag. This removes the tag from all associated references.
+- [List references for a tag](https://docs.vizionapi.com/reference/tag_references_list.md): Returns all references associated with a given tag.
+- [Add tags to a reference](https://docs.vizionapi.com/reference/reference_tags_add.md): Associate one or more tags with a reference.
+- [Remove tag from a reference](https://docs.vizionapi.com/reference/reference_tag_remove.md): Remove the association between a tag and a reference.
+- [Test callback integration](https://docs.vizionapi.com/reference/webhook_trigger_test.md): Trigger a test Status Update to the specified `callback_url`.   Related docs: - [Webhooks](ref:webhooks) - [HMAC validation](ref:authentication#verifying-a-vizion-hmac-signature) - [Custom Webhook authentication](doc:webhook-security#custom-authentication) - [HTTP status codes](ref:status-codes)
+
+## Recipes
+- [Add Container Trace response to a map](https://docs.vizionapi.com/recipes/add-container-trace-response-to-a-map-1.md)
+- [Check number of billable references created between start and end date](https://docs.vizionapi.com/recipes/check-number-of-billable-references-created-between-start-and-end-date.md)
+- [Create reference using HTML input values](https://docs.vizionapi.com/recipes/create-reference-using-html-input-values.md)
+- [Filter for specific milestones](https://docs.vizionapi.com/recipes/filter-for-specific-milestones.md)
+- [Find Vizion carrier code from carrier scac](https://docs.vizionapi.com/recipes/find-vizion-carrier-code-from-carrier-scac.md)
+- [HMAC Authentication - NodeJS/TypeScript with Express](https://docs.vizionapi.com/recipes/hmac-authentication-nodejstypescript-with-express.md)
+- [Map Vizion milestones to TMS events using DCSA event and location codes](https://docs.vizionapi.com/recipes/map-vizion-milestones-to-tms-events-using-dcsa-event-and-location-codes.md)
+- [Receive notification when reference has been unsubscribed](https://docs.vizionapi.com/recipes/receive-notification-when-reference-has-been-unsubscribed.md)
+- [Retrieve most recent reference update](https://docs.vizionapi.com/recipes/retrieve-most-recent-reference-update.md)
+- [Return references with no update payloads](https://docs.vizionapi.com/recipes/return-references-with-no-update-payloads.md)
+- [Store metadata in callback URL](https://docs.vizionapi.com/recipes/store-metadata-in-callback-url.md)
+- [Use DCSA Event & Location codes to filter for events at POL](https://docs.vizionapi.com/recipes/use-dcsa-event-location-codes-to-filter-for-events-at-pol.md)
+- [Use pagination to retrieve all references](https://docs.vizionapi.com/recipes/use-pagination-to-retrieve-all-references.md)
+- [Validating Vizion payload](https://docs.vizionapi.com/recipes/validating-vizion-payload.md)
+
+## Pages
+- [Videos](https://docs.vizionapi.com/page/videos.md)
+
+## Changelog
+- [July 31, 2026 - August 14, 2026](https://docs.vizionapi.com/changelog/july-31-2026-august-14-2026.md)
+- [July 17, 2026 - July 31, 2026](https://docs.vizionapi.com/changelog/july-17-2026-july-31-2026.md)
+- [July 10, 2026 - July 17, 2026](https://docs.vizionapi.com/changelog/july-10-2026-july-17-2026.md)
+- [June 26, 2026 - July 10, 2026](https://docs.vizionapi.com/changelog/june-26-2026-july-10-2026.md)
+- [June 12, 2026 - June 26, 2026](https://docs.vizionapi.com/changelog/june-12-2026-june-26-2026.md)
+- [May 29, 2026 - June 12, 2026](https://docs.vizionapi.com/changelog/may-29-2026-june-12-2026.md)
+- [May 15, 2026 - May 29, 2026](https://docs.vizionapi.com/changelog/may-15-2026-may-29-2026.md)
+- [May 1, 2026 - May 15, 2026](https://docs.vizionapi.com/changelog/may-1-2026-may-15-2026.md)
+- [April 17, 2026 - May 1, 2026](https://docs.vizionapi.com/changelog/april-17-2026-may-1-2026.md)
+- [April 3, 2026 - April 17, 2026](https://docs.vizionapi.com/changelog/april-3-2026-april-17-2026.md)

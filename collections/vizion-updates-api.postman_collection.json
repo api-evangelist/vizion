@@ -1,0 +1,290 @@
+{
+  "item": [
+    {
+      "id": "95a86d8b-fc4b-4e01-afae-42f51ffa97e2",
+      "name": "Updates",
+      "description": {
+        "content": "Retrieve tracking event updates for a reference",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9245b77c-9b43-460d-bf9f-7db452db6ad5",
+          "name": "List Reference Updates",
+          "request": {
+            "name": "List Reference Updates",
+            "description": {
+              "content": "Retrieve tracking event updates for a specific reference. This is the polling alternative to webhooks. Returns all tracking milestones and location events received for the container since subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "references",
+                ":reference_id",
+                "updates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference_id",
+                  "description": "(Required) The unique identifier of the reference"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2915632e-b71b-4ad8-9b9b-7b588934c88b",
+              "name": "List of tracking updates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"reference_id\": \"string\",\n      \"container_id\": \"string\",\n      \"carrier_scac\": \"string\",\n      \"events\": [\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"2014-07-19T07:26:33.252Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": false\n        },\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"1947-07-30T22:18:22.541Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": false\n        }\n      ],\n      \"estimated_departure\": \"1956-10-16T04:07:43.680Z\",\n      \"estimated_arrival\": \"2023-04-24T02:28:28.222Z\",\n      \"actual_departure\": \"2019-01-04T04:15:30.967Z\",\n      \"actual_arrival\": \"1977-06-10T00:08:49.514Z\",\n      \"origin\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"destination\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"created_at\": \"1991-01-18T07:25:16.574Z\",\n      \"updated_at\": \"2011-08-27T14:35:57.674Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"reference_id\": \"string\",\n      \"container_id\": \"string\",\n      \"carrier_scac\": \"string\",\n      \"events\": [\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"1968-02-29T13:44:12.605Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": false\n        },\n        {\n          \"description\": \"Container loaded on vessel\",\n          \"event_type\": \"LOAD\",\n          \"event_timestamp\": \"2002-04-10T04:44:19.169Z\",\n          \"location\": {\n            \"name\": \"Port of Los Angeles\",\n            \"locode\": \"USLAX\",\n            \"country\": \"US\",\n            \"city\": \"Los Angeles\",\n            \"state\": \"CA\",\n            \"timezone\": \"America/Los_Angeles\"\n          },\n          \"vessel\": {\n            \"name\": \"MSC MAYA\",\n            \"imo\": \"9398405\",\n            \"voyage\": \"FE427R\"\n          },\n          \"is_actual\": false\n        }\n      ],\n      \"estimated_departure\": \"1952-09-22T01:29:07.079Z\",\n      \"estimated_arrival\": \"2023-11-18T13:24:29.356Z\",\n      \"actual_departure\": \"1972-08-03T15:24:09.907Z\",\n      \"actual_arrival\": \"1968-06-21T00:38:08.461Z\",\n      \"origin\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"destination\": {\n        \"name\": \"Port of Los Angeles\",\n        \"locode\": \"USLAX\",\n        \"country\": \"US\",\n        \"city\": \"Los Angeles\",\n        \"state\": \"CA\",\n        \"timezone\": \"America/Los_Angeles\"\n      },\n      \"created_at\": \"1961-10-04T21:19:58.677Z\",\n      \"updated_at\": \"1971-05-20T01:01:24.746Z\"\n    }\n  ],\n  \"total\": 7560,\n  \"page\": 9081,\n  \"per_page\": 9756\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e2d49cb-db7d-420f-bcd9-5d19dba30777",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or missing X-API-Key header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb15bfd1-e065-4b15-a295-85938f35d593",
+              "name": "Reference not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "references",
+                    ":reference_id",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference_id",
+                      "description": "(Required) The unique identifier of the reference"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Reference not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://prod.vizionapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0686d3d0-ab8a-4aba-a95e-e28a9f916a8a",
+    "name": "Vizion Container Tracking References Updates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vizion Container Tracking API provides standardized shipment tracking events from ocean carriers, terminals, rail, and customs data sources. Subscribe to a container by providing its container ID and carrier SCAC code. Receive real-time updates via webhooks or poll for tracking milestones via GET endpoints. All events follow a consistent JSON schema regardless of carrier or data source.\n\nContact Support:\n Name: Vizion Support",
+      "type": "text/plain"
+    }
+  }
+}

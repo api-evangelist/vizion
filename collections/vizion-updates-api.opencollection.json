@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vizion Container Tracking References Updates API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Updates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Reference Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.vizionapi.com/references/:reference_id/updates",
+            "params": [
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reference"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve tracking event updates for a specific reference. This is the polling alternative to webhooks. Returns all tracking milestones and location events received for the container since subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
