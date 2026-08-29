@@ -83,6 +83,9 @@ apis:
   - type: GettingStarted
     url: https://docs.vizionapi.com/docs/quick-start
 common:
+  - type: CapabilityMap
+    url: capabilities/vizion-capability-edges.yml
+    name: Vizion Business Capability Map
   - type: AgenticAccess
     url: agentic-access/vizion-agentic-access.yml
   - type: DomainSecurity

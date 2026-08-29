@@ -1,0 +1,35 @@
+slug: vizion
+provider: Vizion
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: References
+  spec_file: vizion-references-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.78
+  evidence: POST /references "Create Container Reference"; "Subscribe to a container by providing its
+    container ID and carrier SCAC code"; "Get Reference Status"
+  reason: References are the subscription objects that put a container under tracking and expose its status,
+    i.e. shipment tracking management within an end-to-end visibility product.
+- tag: Updates
+  spec_file: vizion-updates-api-openapi.yml
+  capability_id: BC-2510.10
+  capability_id_l1: BC-2510
+  capability_name: Event Capture and Status Management
+  confidence: 0.75
+  evidence: GET /references/{reference_id}/updates "List Reference Updates"; schemas TrackingEvent, TrackingUpdate,
+    Vessel, Location; "All events follow a consistent JSON schema regardless of carrier or data source"
+  reason: Delivers standardised shipment tracking events sourced from carriers, terminals, rail and customs
+    — event capture and canonical status translation.
