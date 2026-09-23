@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Vizion Container Tracking References API
   description: The Vizion Container Tracking API provides standardized shipment tracking events from ocean carriers, terminals, rail, and customs data sources. Subscribe to a container by providing its container ID and carrier SCAC code. Receive real-time updates via webhooks or poll for tracking milestones via GET endpoints. All events follow a consistent JSON schema regardless of carrier or data source.
@@ -145,6 +145,37 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    UnprocessableEntity:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or missing X-API-Key header
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
+    BadRequest:
+      description: Invalid request body or parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -159,26 +190,6 @@ components:
         details:
           type: object
           description: Additional error details.
-    CreateReferenceRequest:
-      type: object
-      required:
-      - container_id
-      - carrier_code
-      description: Request body for creating a container tracking reference.
-      properties:
-        container_id:
-          type: string
-          description: The container identification number (e.g. MSCU1234567).
-          example: MSCU1234567
-        carrier_code:
-          type: string
-          description: SCAC carrier code (e.g. MSCU for MSC, MAEU for Maersk).
-          example: MSCU
-        callback_url:
-          type: string
-          format: uri
-          description: Webhook endpoint URL. When provided, Vizion will POST tracking updates to this URL as they become available.
-          example: https://myapp.example.com/webhooks/vizion
     Reference:
       type: object
       description: A container tracking subscription (reference) with status metadata.
@@ -220,37 +231,26 @@ components:
           type: string
           format: date-time
           description: Timestamp of the last update.
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or missing X-API-Key header
-    BadRequest:
-      description: Invalid request body or parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Reference not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Reference not found
-    UnprocessableEntity:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    CreateReferenceRequest:
+      type: object
+      required:
+      - container_id
+      - carrier_code
+      description: Request body for creating a container tracking reference.
+      properties:
+        container_id:
+          type: string
+          description: The container identification number (e.g. MSCU1234567).
+          example: MSCU1234567
+        carrier_code:
+          type: string
+          description: SCAC carrier code (e.g. MSCU for MSC, MAEU for Maersk).
+          example: MSCU
+        callback_url:
+          type: string
+          format: uri
+          description: Webhook endpoint URL. When provided, Vizion will POST tracking updates to this URL as they become available.
+          example: https://myapp.example.com/webhooks/vizion
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
