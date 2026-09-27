@@ -145,38 +145,27 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    UnprocessableEntity:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or missing X-API-Key header
-    NotFound:
-      description: Reference not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Reference not found
-    BadRequest:
-      description: Invalid request body or parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    CreateReferenceRequest:
+      type: object
+      required:
+      - container_id
+      - carrier_code
+      description: Request body for creating a container tracking reference.
+      properties:
+        container_id:
+          type: string
+          description: The container identification number (e.g. MSCU1234567).
+          example: MSCU1234567
+        carrier_code:
+          type: string
+          description: SCAC carrier code (e.g. MSCU for MSC, MAEU for Maersk).
+          example: MSCU
+        callback_url:
+          type: string
+          format: uri
+          description: Webhook endpoint URL. When provided, Vizion will POST tracking updates to this URL as they become available.
+          example: https://myapp.example.com/webhooks/vizion
     Error:
       type: object
       description: Standard error response.
@@ -231,26 +220,37 @@ components:
           type: string
           format: date-time
           description: Timestamp of the last update.
-    CreateReferenceRequest:
-      type: object
-      required:
-      - container_id
-      - carrier_code
-      description: Request body for creating a container tracking reference.
-      properties:
-        container_id:
-          type: string
-          description: The container identification number (e.g. MSCU1234567).
-          example: MSCU1234567
-        carrier_code:
-          type: string
-          description: SCAC carrier code (e.g. MSCU for MSC, MAEU for Maersk).
-          example: MSCU
-        callback_url:
-          type: string
-          format: uri
-          description: Webhook endpoint URL. When provided, Vizion will POST tracking updates to this URL as they become available.
-          example: https://myapp.example.com/webhooks/vizion
+  responses:
+    UnprocessableEntity:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or missing X-API-Key header
+    BadRequest:
+      description: Invalid request body or parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

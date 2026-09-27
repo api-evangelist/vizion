@@ -68,35 +68,62 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or missing X-API-Key header
   schemas:
-    Location:
+    Error:
       type: object
-      description: A geographic location (port, terminal, or rail yard).
+      description: Standard error response.
       properties:
-        name:
+        error:
           type: string
-          description: Location name.
-          example: Port of Los Angeles
-        locode:
+          description: Error type or code.
+        message:
           type: string
-          description: UN/LOCODE for the location.
-          example: USLAX
-        country:
+          description: Human-readable error message.
+        details:
+          type: object
+          description: Additional error details.
+    TrackingEvent:
+      type: object
+      description: An individual tracking milestone event.
+      properties:
+        description:
           type: string
-          description: Two-letter ISO 3166-1 country code.
-          example: US
-        city:
+          description: Human-readable event description.
+          example: Container loaded on vessel
+        event_type:
           type: string
-          description: City name.
-          example: Los Angeles
-        state:
+          description: Standardized event type code.
+          example: LOAD
+        event_timestamp:
           type: string
-          description: State or province.
-          example: CA
-        timezone:
-          type: string
-          description: IANA timezone identifier.
-          example: America/Los_Angeles
+          format: date-time
+          description: When the event occurred.
+        location:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        is_actual:
+          type: boolean
+          description: True if this is an actual (historical) event; false if estimated.
     TrackingUpdate:
       type: object
       description: A tracking event update for a container reference.
@@ -144,42 +171,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    Error:
-      type: object
-      description: Standard error response.
-      properties:
-        error:
-          type: string
-          description: Error type or code.
-        message:
-          type: string
-          description: Human-readable error message.
-        details:
-          type: object
-          description: Additional error details.
-    TrackingEvent:
-      type: object
-      description: An individual tracking milestone event.
-      properties:
-        description:
-          type: string
-          description: Human-readable event description.
-          example: Container loaded on vessel
-        event_type:
-          type: string
-          description: Standardized event type code.
-          example: LOAD
-        event_timestamp:
-          type: string
-          format: date-time
-          description: When the event occurred.
-        location:
-          $ref: '#/components/schemas/Location'
-        vessel:
-          $ref: '#/components/schemas/Vessel'
-        is_actual:
-          type: boolean
-          description: True if this is an actual (historical) event; false if estimated.
     Vessel:
       type: object
       description: Vessel information for a tracking event.
@@ -196,25 +187,34 @@ components:
           type: string
           description: Voyage number.
           example: FE427R
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or missing X-API-Key header
-    NotFound:
-      description: Reference not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Reference not found
+    Location:
+      type: object
+      description: A geographic location (port, terminal, or rail yard).
+      properties:
+        name:
+          type: string
+          description: Location name.
+          example: Port of Los Angeles
+        locode:
+          type: string
+          description: UN/LOCODE for the location.
+          example: USLAX
+        country:
+          type: string
+          description: Two-letter ISO 3166-1 country code.
+          example: US
+        city:
+          type: string
+          description: City name.
+          example: Los Angeles
+        state:
+          type: string
+          description: State or province.
+          example: CA
+        timezone:
+          type: string
+          description: IANA timezone identifier.
+          example: America/Los_Angeles
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
