@@ -68,25 +68,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Reference not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Reference not found
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or missing X-API-Key header
   schemas:
     Error:
       type: object
@@ -101,6 +82,50 @@ components:
         details:
           type: object
           description: Additional error details.
+    Vessel:
+      type: object
+      description: Vessel information for a tracking event.
+      properties:
+        name:
+          type: string
+          description: Vessel name.
+          example: MSC MAYA
+        imo:
+          type: string
+          description: IMO vessel number.
+          example: '9398405'
+        voyage:
+          type: string
+          description: Voyage number.
+          example: FE427R
+    Location:
+      type: object
+      description: A geographic location (port, terminal, or rail yard).
+      properties:
+        name:
+          type: string
+          description: Location name.
+          example: Port of Los Angeles
+        locode:
+          type: string
+          description: UN/LOCODE for the location.
+          example: USLAX
+        country:
+          type: string
+          description: Two-letter ISO 3166-1 country code.
+          example: US
+        city:
+          type: string
+          description: City name.
+          example: Los Angeles
+        state:
+          type: string
+          description: State or province.
+          example: CA
+        timezone:
+          type: string
+          description: IANA timezone identifier.
+          example: America/Los_Angeles
     TrackingEvent:
       type: object
       description: An individual tracking milestone event.
@@ -171,50 +196,25 @@ components:
         updated_at:
           type: string
           format: date-time
-    Vessel:
-      type: object
-      description: Vessel information for a tracking event.
-      properties:
-        name:
-          type: string
-          description: Vessel name.
-          example: MSC MAYA
-        imo:
-          type: string
-          description: IMO vessel number.
-          example: '9398405'
-        voyage:
-          type: string
-          description: Voyage number.
-          example: FE427R
-    Location:
-      type: object
-      description: A geographic location (port, terminal, or rail yard).
-      properties:
-        name:
-          type: string
-          description: Location name.
-          example: Port of Los Angeles
-        locode:
-          type: string
-          description: UN/LOCODE for the location.
-          example: USLAX
-        country:
-          type: string
-          description: Two-letter ISO 3166-1 country code.
-          example: US
-        city:
-          type: string
-          description: City name.
-          example: Los Angeles
-        state:
-          type: string
-          description: State or province.
-          example: CA
-        timezone:
-          type: string
-          description: IANA timezone identifier.
-          example: America/Los_Angeles
+  responses:
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or missing X-API-Key header
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
