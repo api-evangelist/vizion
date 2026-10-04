@@ -69,35 +69,29 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
+    TrackingEvent:
       type: object
-      description: Standard error response.
+      description: An individual tracking milestone event.
       properties:
-        error:
+        description:
           type: string
-          description: Error type or code.
-        message:
+          description: Human-readable event description.
+          example: Container loaded on vessel
+        event_type:
           type: string
-          description: Human-readable error message.
-        details:
-          type: object
-          description: Additional error details.
-    Vessel:
-      type: object
-      description: Vessel information for a tracking event.
-      properties:
-        name:
+          description: Standardized event type code.
+          example: LOAD
+        event_timestamp:
           type: string
-          description: Vessel name.
-          example: MSC MAYA
-        imo:
-          type: string
-          description: IMO vessel number.
-          example: '9398405'
-        voyage:
-          type: string
-          description: Voyage number.
-          example: FE427R
+          format: date-time
+          description: When the event occurred.
+        location:
+          $ref: '#/components/schemas/Location'
+        vessel:
+          $ref: '#/components/schemas/Vessel'
+        is_actual:
+          type: boolean
+          description: True if this is an actual (historical) event; false if estimated.
     Location:
       type: object
       description: A geographic location (port, terminal, or rail yard).
@@ -126,29 +120,19 @@ components:
           type: string
           description: IANA timezone identifier.
           example: America/Los_Angeles
-    TrackingEvent:
+    Error:
       type: object
-      description: An individual tracking milestone event.
+      description: Standard error response.
       properties:
-        description:
+        error:
           type: string
-          description: Human-readable event description.
-          example: Container loaded on vessel
-        event_type:
+          description: Error type or code.
+        message:
           type: string
-          description: Standardized event type code.
-          example: LOAD
-        event_timestamp:
-          type: string
-          format: date-time
-          description: When the event occurred.
-        location:
-          $ref: '#/components/schemas/Location'
-        vessel:
-          $ref: '#/components/schemas/Vessel'
-        is_actual:
-          type: boolean
-          description: True if this is an actual (historical) event; false if estimated.
+          description: Human-readable error message.
+        details:
+          type: object
+          description: Additional error details.
     TrackingUpdate:
       type: object
       description: A tracking event update for a container reference.
@@ -196,16 +180,23 @@ components:
         updated_at:
           type: string
           format: date-time
+    Vessel:
+      type: object
+      description: Vessel information for a tracking event.
+      properties:
+        name:
+          type: string
+          description: Vessel name.
+          example: MSC MAYA
+        imo:
+          type: string
+          description: IMO vessel number.
+          example: '9398405'
+        voyage:
+          type: string
+          description: Voyage number.
+          example: FE427R
   responses:
-    NotFound:
-      description: Reference not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Reference not found
     Unauthorized:
       description: Missing or invalid API key
       content:
@@ -215,6 +206,15 @@ components:
           example:
             error: unauthorized
             message: Invalid or missing X-API-Key header
+    NotFound:
+      description: Reference not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Reference not found
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
