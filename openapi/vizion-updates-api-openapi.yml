@@ -69,6 +69,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      description: Standard error response.
+      properties:
+        error:
+          type: string
+          description: Error type or code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          description: Additional error details.
     TrackingEvent:
       type: object
       description: An individual tracking milestone event.
@@ -120,19 +133,22 @@ components:
           type: string
           description: IANA timezone identifier.
           example: America/Los_Angeles
-    Error:
+    Vessel:
       type: object
-      description: Standard error response.
+      description: Vessel information for a tracking event.
       properties:
-        error:
+        name:
           type: string
-          description: Error type or code.
-        message:
+          description: Vessel name.
+          example: MSC MAYA
+        imo:
           type: string
-          description: Human-readable error message.
-        details:
-          type: object
-          description: Additional error details.
+          description: IMO vessel number.
+          example: '9398405'
+        voyage:
+          type: string
+          description: Voyage number.
+          example: FE427R
     TrackingUpdate:
       type: object
       description: A tracking event update for a container reference.
@@ -180,22 +196,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    Vessel:
-      type: object
-      description: Vessel information for a tracking event.
-      properties:
-        name:
-          type: string
-          description: Vessel name.
-          example: MSC MAYA
-        imo:
-          type: string
-          description: IMO vessel number.
-          example: '9398405'
-        voyage:
-          type: string
-          description: Voyage number.
-          example: FE427R
   responses:
     Unauthorized:
       description: Missing or invalid API key
