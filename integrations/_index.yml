@@ -28,3 +28,16 @@
     builder: unknown (not in the directory record)
   status: not-a-workflow
   arazzo: null
+- slug: vizion-airtable-own
+  label: Airtable (own)
+  partner: airtable
+  partner_name: Airtable (own)
+  category: Airtable extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://airtable.com/marketplace/blk4vTe3eUjqUEwtf/vizion-container-tracking
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
